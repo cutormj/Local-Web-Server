@@ -17,16 +17,12 @@ def upload_file():
         save_path = os.path.join('D:', 'uploads', uploaded_file.filename)
         uploaded_file.save(save_path)
 
-        return f"File '{uploaded_file.filename}' uploaded successfully!"
+        # Render a different HTML file with the success message and file name
+        return render_template('upload_success.html', filename=uploaded_file.filename)
     else:
         # Render an HTML form for file upload
         return render_template('upload_form.html')
 
-@app.route('/files')
-def display_files():
-    target_directory = r'D:\uploads'  # Change this to your actual directory
-    files = list_files(target_directory)
-    return render_template('list_files.html', files=files)
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8080)
+    app.run(host='0.0.0.0', port=8080, ssl_context=('https.crt', 'https.key'))
+
