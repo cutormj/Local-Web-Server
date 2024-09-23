@@ -4,12 +4,58 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>File Upload Success</title>
-    <!-- Add any additional CSS or stylesheets here -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #2d87f0;
+        }
+        p {
+            margin: 10px 0;
+        }
+        .details {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .details p {
+            margin: 5px 0;
+        }
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #2d87f0;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        a:hover {
+            background-color: #1c6bb3;
+        }
+    </style>
 </head>
 <body>
     <h1>File Uploaded Successfully!</h1>
-    <p>The file <strong>{{ filename }}</strong> has been added to Print Job.</p>
-    <!-- You can add more content or styling as desired -->
-     <a href="/">Ok</a>
+    <p>The file <strong>{{ filename }}</strong> has been added to the print job.</p>
+    
+    <div class="details">
+        <h1>{{ folder_name }}</h1>
+        <h2>Print Job Details</h2>
+        <p><strong>Number of Copies:</strong> {{ copies }}</p>
+        <p><strong>Paper Size:</strong> {{ paper_size }}</p>
+        <p><strong>Color Mode:</strong> {{ color_mode }}</p>
+        <p><strong>Page Range:</strong> {{ page_range }}</p>
+        <p><strong>Duplex Printing:</strong> {{ duplex }}</p>
+        <p><strong>Orientation:</strong> {{ orientation }}</p>
+        <p><strong>Print Quality:</strong> {{ print_quality }}</p>
+        <p><strong>Collate:</strong> {{ collate }}</p>
+    </div>
+    <a href="/">Ok</a>
 </body>
 </html>

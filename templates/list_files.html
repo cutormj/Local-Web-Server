@@ -1,17 +1,110 @@
 <!DOCTYPE html>
-<html>
-<head></head>
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Uploaded Files</title>
 </head>
 <body>
-    <h1>For Vendors</h1>
-    <h2>Uploaded Files</h2>
-    <ul>
-        {% for file_path in files %}
-            <li>{{ file_path }}</li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <h1>JSON Files in Uploads</h1>
+        <ul class="list-group">
+            {% for file in json_files %}
+                <li class="list-group-item">
+                    <strong>ID:</strong> {{ file.id }}<br>
+                    <strong>File:</strong> Test {{ file.file }}<br>
+                    <strong>Type:</strong> {{ file.file_type }}<br>
+                    <strong>Copies:</strong> {{ file.copies }}<br>
+                    <strong>Paper Size:</strong> {{ file.paper_size }}<br>
+                    <strong>Color Mode:</strong> {{ file.color_mode }}<br>
+                    <strong>Duplex:</strong> {{ file.duplex }}<br>
+                    <strong>Orientation:</strong> {{ file.orientation }}<br>
+                    <strong>Print Quality:</strong> {{ file.print_quality }}<br>
+                    <strong>Collate:</strong> {{ file.collate }}<br><br>
+                                                
+                    <select class="form-select" id="printer-select-{{ loop.index }}">
+                        <option value="">Select a printer</option>
+                        {% for printer in printer_names %}
+                            <option value="{{ printer }}">{{ printer }}</option>
+                        {% endfor %}
+                    </select>
+                    
+                    <button class="btn btn-primary" value="{{ file.file }}" onclick="handleButtonClick(this.value, document.getElementById('printer-select-{{ loop.index }}').value)">Print</button>
+                    
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script>
+        function handleButtonClick(fileName) {
+            // Redirect to the 'display' route with the file name
+            console.log(fileName);
+            window.location.href = '/display/' + encodeURIComponent(fileName);
+        }
+    </script>
 </body>
 </html>
+
+
+
+
+
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: white;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    .list-group {
+        list-style: none;
+        padding: 0;
+    }
+
+    .list-group-item {
+        padding: 15px;
+        margin: 10px 0;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        background-color: #f9f9f9;
+        transition: background-color 0.2s;
+    }
+
+    .list-group-item:hover {
+        background-color: #f1f1f1;
+    }
+
+    strong {
+        color: #555;
+    }
+
+    @media (max-width: 600px) {
+        .container {
+            padding: 10px;
+        }
+
+        h1 {
+            font-size: 24px;
+        }
+
+        .list-group-item {
+            padding: 10px;
+        }
+    }
+</style>
